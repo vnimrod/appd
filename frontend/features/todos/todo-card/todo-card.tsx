@@ -7,7 +7,6 @@ type Props = {
 };
 
 export const TodoCard = ({ todo }: Props) => {
-  console.log(todo);
   return (
     <li className={styles.todoCard}>
       <span>{todo.text}</span>
