@@ -1,8 +1,9 @@
 import { makeAutoObservable } from "mobx"
 import axios from 'axios'
 
-type Tags = {
-  create: Tags[]
+type Tag = {
+  id: number,
+  text: string
 }
 
 export type Todo = {
@@ -10,7 +11,7 @@ export type Todo = {
   createdTime: string,
   text: string,
   completed: boolean
-  tags?: Tags 
+  tags?: Tag[] 
 }
 
 export default class TodosStore {
