@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx"
-import axios from 'axios'
+import { fetchTodos } from "../../services/todos/todos"
 
 type Tag = {
   id: number,
@@ -22,7 +22,7 @@ export default class TodosStore {
   }
 
   async fetch() {
-    const data = await axios.get('http://localhost:3333/api/todos')
-      this.list = data?.data
+    const data = await fetchTodos()
+    this.list = data
   }
 }
