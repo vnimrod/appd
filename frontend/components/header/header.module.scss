@@ -1,5 +1,8 @@
+@import '../../utils/UI/sass-variables/scss-variables';
+
 .header {
-  font-size: 20px;
-  text-align: center;
+  font-size: $headerText;
   margin-top: 50px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
 }
