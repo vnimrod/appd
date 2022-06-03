@@ -1,11 +1,12 @@
 import React, { ChangeEvent, useState } from 'react';
 import styles from './todo-card.module.scss';
 import Image from 'next/image';
-import TodosStore, { Todo } from '../todos.model';
+import { Todo } from '../todos.model';
 import { useStore } from '../../../services/store';
 import { Button } from '../../../utils/UI/button';
 import { Input } from '../../../utils/UI/input';
 import icons from '../../../utils/UI/icons/icons.data.json';
+import texts from '../todos.texts.json';
 
 type Props = {
   todo: Todo;
@@ -36,7 +37,7 @@ export const TodoCard = ({ todo }: Props) => {
   };
 
   const onDelete = () => {
-    if (window.confirm('Are you sure you want to delete this todo?')) {
+    if (window.confirm(texts.windowsConfirmMessage)) {
       store.todos.delete(todo.id);
     }
   };
@@ -45,8 +46,6 @@ export const TodoCard = ({ todo }: Props) => {
     const date = new Date(todo.createdTime);
     return date.toLocaleDateString('he-IL');
   };
-
-  // const x = Date.parse(todo.createdTime)
 
   return (
     <li className={styles.todoCard}>

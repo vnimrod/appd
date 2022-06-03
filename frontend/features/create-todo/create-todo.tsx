@@ -4,6 +4,7 @@ import styles from './create-todo.module.scss';
 import type { FormData } from '../../services/todos/todos';
 import { Button } from '../../utils/UI/button';
 import { Input } from '../../utils/UI/input';
+import texts from './create-todo-texts.json';
 
 export const CreateTodo = () => {
   const store = useStore();
@@ -24,7 +25,7 @@ export const CreateTodo = () => {
         placeholder={'Create New Todo'}
       />
       <div className={styles.addButton}>
-        <Button type="submit">ADD</Button>
+        <Button type="submit">{texts.createButtonText}</Button>
       </div>
     </form>
   );

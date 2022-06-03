@@ -1,9 +1,10 @@
+@import '../../utils/UI/sass-variables/scss-variables';
 .root {
   max-width: 960px;
   min-height: 1000px;
   margin: auto;
   margin-bottom: 50px;
-  background-color: #7B68EE;
+  background-color: $mediumSlateBlue;
   padding: 30px;
-  box-shadow:  0 0 10px #000000;
+  box-shadow:  0 0 10px $black;
 }
