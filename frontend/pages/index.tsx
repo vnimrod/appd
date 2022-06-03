@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { store } from '../services/store';
 import { TodosSection } from '../features/todos/todos-section';
 import { Search } from '../components/search';
+import { CreateTodo } from '../features/create-todo';
 
 const Index: NextPage = () => {
   const [mounted, setMounted] = useState(false);
@@ -14,6 +15,7 @@ const Index: NextPage = () => {
   }, [store]);
   return mounted ? (
     <>
+      <CreateTodo />
       <Search fetchData={store.todos.fetch} />
       <TodosSection />
     </>
