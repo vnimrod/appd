@@ -24,11 +24,6 @@ export default class TodosStore {
     });
   }
 
- async add (formData: todosService.formData) {
-    const data = await todosService.addTodo(formData)
-    this.list = [...this.list, data]
-  }
-
   async fetch(searchQuery: string = '') {
     const data = await todosService.fetchTodos()
 
@@ -43,5 +38,15 @@ export default class TodosStore {
         this.list = [...data]
       })
     }
+  }
+
+  async add (formData: todosService.FormData) {
+    const data = await todosService.addTodo(formData)
+    this.list = [...this.list, data]
+  }
+
+  async update (id: number, editedData: todosService.EditedData) {
+    await todosService.updateTodo(id, editedData)
+    this.list = this.list.map((item) => item.id === id ? {...item, text: editedData.text}: item)
   }
 }

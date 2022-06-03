@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useStore } from '../../services/store';
 import styles from './create-todo.module.scss';
-import type { formData } from '../../services/todos/todos';
+import type { FormData } from '../../services/todos/todos';
 
 export const CreateTodo = () => {
   const store = useStore();
-  const [formData, setFormData] = useState<formData>({
+  const [formData, setFormData] = useState<FormData>({
     text: '',
   });
   const addNewTodo = async (event: ChangeEvent<HTMLFormElement>) => {
