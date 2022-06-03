@@ -1,5 +1,5 @@
-import { makeAutoObservable } from "mobx"
-import { fetchTodos } from "../../services/todos/todos"
+import { action, makeAutoObservable, runInAction } from "mobx"
+import { fetchTodos, searchTodos } from "../../services/todos/todos"
 
 type Tag = {
   id: number,
@@ -15,14 +15,27 @@ export type Todo = {
 }
 
 export default class TodosStore {
-  list!: Todo[]
+  list: Todo[] = [] 
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this,{
+      fetch: action.bound
+    });
   }
 
-  async fetch() {
+  async fetch(searchQuery: string = '') {
     const data = await fetchTodos()
-    this.list = data
+
+    if(searchQuery) {
+      const searchedTodos = await searchTodos(searchQuery)
+      const todosIds = searchedTodos.map((item: Todo) => item.id)
+      runInAction(() => {
+        this.list = data.filter((item: Todo) => todosIds.includes(item.id))
+      })
+    } else {
+    runInAction(() => {
+        this.list = [...data]
+      })
+    }
   }
 }
