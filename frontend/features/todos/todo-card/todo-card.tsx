@@ -44,11 +44,11 @@ export const TodoCard = ({ todo }: Props) => {
       {editClicked ? (
         <Input onChange={onEditTodoTextChange} value={editData.text} />
       ) : (
-        <span>{todo.text}</span>
+        <span className={styles.todoText}>{todo.text}</span>
       )}
       <span>{todo.createdTime}</span>
       <span>{todo?.tags?.map((tag) => `#${tag.text}`)}</span>
-      <div>
+      <div className={styles.buttons}>
         <Button onClick={onEdit} type="button">
           <Image {...icons.editIcon} />
         </Button>
