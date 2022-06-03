@@ -1,9 +1,11 @@
 import axios from "axios"
 import type { FormData, EditedData } from "../todos/todos"
 
+const BACKEND_BASE_URL = "http://localhost:3333/api"
+
 export const getAll = async () => {
   try {
-    const data = await axios.get('http://localhost:3333/api/todos')
+    const data = await axios.get(`${BACKEND_BASE_URL}/todos`)
 
     return data.data
   } catch (error) {
@@ -11,9 +13,9 @@ export const getAll = async () => {
   }
 }
 
-export const getSearchedTodo = async (searchQuery: string) => {
+export const getAllSearched = async (searchQuery: string) => {
   try {
-    const data = await axios.get(`http://localhost:3333/api/todos?search=${searchQuery}`)
+    const data = await axios.get(`${BACKEND_BASE_URL}/todos?search=${searchQuery}`)
 
     return data.data
   } catch (error) {
@@ -21,7 +23,7 @@ export const getSearchedTodo = async (searchQuery: string) => {
   }
 }
 
-export const addNewTodo = async (formData: FormData) => {
+export const add = async (formData: FormData) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -30,7 +32,7 @@ export const addNewTodo = async (formData: FormData) => {
 
   try {
     const data = await axios.post(
-      'http://localhost:3333/api/todo',
+      `${BACKEND_BASE_URL}/todo`,
       formData,
       config
     );
@@ -41,7 +43,7 @@ export const addNewTodo = async (formData: FormData) => {
   }
 }
 
-export const updateTodo = async (id: number, editedData: EditedData) => {
+export const update = async (id: number, editedData: EditedData) => {
 
   const body = {
     id,
@@ -56,7 +58,7 @@ export const updateTodo = async (id: number, editedData: EditedData) => {
 
   try {
     const data = await axios.patch(
-      'http://localhost:3333/api/todo',
+      `${BACKEND_BASE_URL}/todo`,
       body,
       config
     );
@@ -64,5 +66,13 @@ export const updateTodo = async (id: number, editedData: EditedData) => {
     return data.data
   } catch (error) {
     throw new Error("Failed to update new data. please, try again")
+  }
+}
+
+export const singleDelete = async (id: number) => {
+  try {
+    await axios.delete(`${BACKEND_BASE_URL}/todo/${id}`)
+  } catch (error) {
+    throw new Error("Failed to delete data. please, try again")
   }
 }

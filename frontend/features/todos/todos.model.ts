@@ -49,4 +49,9 @@ export default class TodosStore {
     await todosService.updateTodo(id, editedData)
     this.list = this.list.map((item) => item.id === id ? {...item, text: editedData.text}: item)
   }
+  
+  async delete (id: number) {
+    await todosService.deleteSingleTodo(id)
+    this.list = this.list.filter((item) => item.id !== id)
+  }
 }

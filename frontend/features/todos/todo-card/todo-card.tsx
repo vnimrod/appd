@@ -16,7 +16,7 @@ export const TodoCard = ({ todo }: Props) => {
     completed: false,
   });
 
-  const onEditClick = () => {
+  const onEdit = () => {
     setEditClicked(!editClicked);
   };
 
@@ -29,6 +29,10 @@ export const TodoCard = ({ todo }: Props) => {
     setEditClicked(false);
   };
 
+  const onDelete = () => {
+    store.todos.delete(todo.id);
+  };
+
   return (
     <li className={styles.todoCard}>
       {editClicked ? (
@@ -38,8 +42,8 @@ export const TodoCard = ({ todo }: Props) => {
       )}
       <span>{todo.createdTime}</span>
       <span>{todo?.tags?.map((tag) => `#${tag.text}`)}</span>
-      <button onClick={onEditClick}>edit button</button>
-      <button>delete button</button>
+      <button onClick={onEdit}>edit button</button>
+      <button onClick={onDelete}>delete button</button>
       <button onClick={onCheckClick}>check button</button>
     </li>
   );

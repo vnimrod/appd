@@ -16,16 +16,20 @@ export const fetchTodos = async () => {
 }
 
 export const searchTodos = async (searchQuery: string) => {
-  const resData = await api.getSearchedTodo(searchQuery)
+  const resData = await api.getAllSearched(searchQuery)
   return resData
 }
 
 export const addTodo = async (formData: FormData) => {
-  const resData = await api.addNewTodo(formData)
+  const resData = await api.add(formData)
   return resData
 }
 
 export const updateTodo = async (id: number, editedData: EditedData) => {
-  const resData = await api.updateTodo(id, editedData)
+  const resData = await api.update(id, editedData)
   return resData
+}
+
+export const deleteSingleTodo = async (id: number) => {
+  await api.singleDelete(id)
 }
