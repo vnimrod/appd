@@ -1,0 +1,17 @@
+{
+  "checkMarkIcon": {
+    "src": "/icons/check-mark-icon.png",
+    "width": "25px",
+    "height": "25px"
+  },
+  "deleteIcon": {
+    "src": "/icons/delete-icon.png",
+    "width": "25px",
+    "height": "25px"
+  },
+  "editIcon": {
+    "src": "/icons/edit-icon.png",
+    "width": "25px",
+    "height": "25px"
+  }
+}

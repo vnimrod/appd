@@ -1,7 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
 import styles from './todo-card.module.scss';
+import Image from 'next/image';
 import { Todo } from '../todos.model';
 import { useStore } from '../../../services/store';
+import { Button } from '../../../utils/UI/button';
+import { Input } from '../../../utils/UI/input';
+import icons from '../../../utils/UI/icons/icons.data.json';
 
 type Props = {
   todo: Todo;
@@ -36,15 +40,23 @@ export const TodoCard = ({ todo }: Props) => {
   return (
     <li className={styles.todoCard}>
       {editClicked ? (
-        <input onChange={onEditTodoChange} value={editData.text} />
+        <Input onChange={onEditTodoChange} value={editData.text} />
       ) : (
         <span>{todo.text}</span>
       )}
       <span>{todo.createdTime}</span>
       <span>{todo?.tags?.map((tag) => `#${tag.text}`)}</span>
-      <button onClick={onEdit}>edit button</button>
-      <button onClick={onDelete}>delete button</button>
-      <button onClick={onCheckClick}>check button</button>
+      <div>
+        <Button onClick={onEdit} type="button">
+          <Image {...icons.editIcon} />
+        </Button>
+        <Button onClick={onDelete} type="button">
+          <Image {...icons.deleteIcon} />
+        </Button>
+        <Button onClick={onCheckClick} type="button">
+          <Image {...icons.checkMarkIcon} />
+        </Button>
+      </div>
     </li>
   );
 };

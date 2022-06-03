@@ -2,6 +2,8 @@ import React, { ChangeEvent, useState } from 'react';
 import { useStore } from '../../services/store';
 import styles from './create-todo.module.scss';
 import type { FormData } from '../../services/todos/todos';
+import { Button } from '../../utils/UI/button';
+import { Input } from '../../utils/UI/input';
 
 export const CreateTodo = () => {
   const store = useStore();
@@ -16,11 +18,11 @@ export const CreateTodo = () => {
   };
   return (
     <form className={styles.createTodo} onSubmit={addNewTodo}>
-      <input
+      <Input
         value={formData.text}
         onChange={(event) => setFormData({ text: event.target.value })}
       />
-      <button type="submit">Add</button>
+      <Button type="submit">Add</Button>
     </form>
   );
 };
