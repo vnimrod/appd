@@ -13,5 +13,9 @@ export const Search = ({ fetchData }: Props) => {
     }, 200);
   };
 
-  return <Input onChange={onInputChange} />;
+  return (
+    <div className={styles.search}>
+      <Input onChange={onInputChange} placeholder={'Search'} />
+    </div>
+  );
 };

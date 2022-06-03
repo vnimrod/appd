@@ -1,0 +1,15 @@
+@import '../sass-variables/scss-variables';
+
+.input {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: $large;
+  width: 100%;
+  height: 60px;
+  padding: 1rem 2rem;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  display: block;
+  transition: all 0.3s;
+}

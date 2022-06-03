@@ -21,8 +21,11 @@ export const CreateTodo = () => {
       <Input
         value={formData.text}
         onChange={(event) => setFormData({ text: event.target.value })}
+        placeholder={'Create New Todo'}
       />
-      <Button type="submit">Add</Button>
+      <div className={styles.addButton}>
+        <Button type="submit">ADD</Button>
+      </div>
     </form>
   );
 };

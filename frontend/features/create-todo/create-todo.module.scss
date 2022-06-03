@@ -1,0 +1,14 @@
+@import '../../utils/UI/sass-variables/scss-variables';
+.createTodo {
+  display: flex;
+  height: 100px;
+  background-color: $darkSlateBlue;
+  padding: 20px;
+  box-shadow:  0 0 10px $black;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}

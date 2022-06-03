@@ -2,7 +2,9 @@
 
 .header {
   font-size: $headerText;
-  margin-top: 50px;
+  margin: 50px 0;
+  width: 100%;
   text-align: center;
+  color: $white;
   font-family: 'Montserrat', sans-serif;
 }

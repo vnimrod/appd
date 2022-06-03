@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+@import '../utils/UI/sass-variables/scss-variables';
+
 * {
   box-sizing: border-box;
 }
@@ -6,6 +8,8 @@
 body {
   padding: 0;
   margin: 0;
+  // background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26)  
+  background-color: $lightGrey
 }
 
 a {
