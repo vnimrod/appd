@@ -24,7 +24,7 @@ export const TodoCard = ({ todo }: Props) => {
     setEditClicked(!editClicked);
   };
 
-  const onEditTodoChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onEditTodoTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEditData({ ...editData, text: event.target.value });
   };
 
@@ -34,13 +34,15 @@ export const TodoCard = ({ todo }: Props) => {
   };
 
   const onDelete = () => {
-    store.todos.delete(todo.id);
+    if (window.confirm('Are you sure you want to delete this todo?')) {
+      store.todos.delete(todo.id);
+    }
   };
 
   return (
     <li className={styles.todoCard}>
       {editClicked ? (
-        <Input onChange={onEditTodoChange} value={editData.text} />
+        <Input onChange={onEditTodoTextChange} value={editData.text} />
       ) : (
         <span>{todo.text}</span>
       )}
