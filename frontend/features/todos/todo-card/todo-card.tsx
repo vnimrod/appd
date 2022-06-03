@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import styles from './todo-card.module.scss';
 import Image from 'next/image';
-import { Todo } from '../todos.model';
+import TodosStore, { Todo } from '../todos.model';
 import { useStore } from '../../../services/store';
 import { Button } from '../../../utils/UI/button';
 import { Input } from '../../../utils/UI/input';
@@ -14,14 +14,14 @@ type Props = {
 export const TodoCard = ({ todo }: Props) => {
   const store = useStore();
 
-  const [editClicked, setEditClicked] = useState(false);
+  const [isEditClicked, setIsEditClicked] = useState(false);
   const [editData, setEditData] = useState({
     text: todo?.text || '',
     completed: false,
   });
 
   const onEdit = () => {
-    setEditClicked(!editClicked);
+    setIsEditClicked(!isEditClicked);
   };
 
   const onEditTodoTextChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,8 +29,10 @@ export const TodoCard = ({ todo }: Props) => {
   };
 
   const onCheckClick = () => {
-    store.todos.update(todo.id, editData);
-    setEditClicked(false);
+    if (editData.text && editData.text !== todo.text) {
+      store.todos.update(todo.id, editData);
+    }
+    setIsEditClicked(false);
   };
 
   const onDelete = () => {
@@ -39,24 +41,37 @@ export const TodoCard = ({ todo }: Props) => {
     }
   };
 
+  const timeFormat = () => {
+    const date = new Date(todo.createdTime);
+    return date.toLocaleDateString('he-IL');
+  };
+
+  // const x = Date.parse(todo.createdTime)
+
   return (
     <li className={styles.todoCard}>
-      {editClicked ? (
-        <Input onChange={onEditTodoTextChange} value={editData.text} />
+      {isEditClicked ? (
+        <div className={styles.editInput}>
+          <Input onChange={onEditTodoTextChange} value={editData.text} />
+        </div>
       ) : (
         <span className={styles.todoText}>{todo.text}</span>
       )}
-      <span>{todo.createdTime}</span>
-      <span>{todo?.tags?.map((tag) => `#${tag.text}`)}</span>
+      <span className={styles.date}>{timeFormat()}</span>
+      <span className={styles.tags}>
+        {todo?.tags?.map((tag) => `#${tag.text} `)}
+      </span>
       <div className={styles.buttons}>
+        {isEditClicked && (
+          <Button onClick={onCheckClick} type="button">
+            <Image {...icons.checkMarkIcon} />
+          </Button>
+        )}
         <Button onClick={onEdit} type="button">
           <Image {...icons.editIcon} />
         </Button>
         <Button onClick={onDelete} type="button">
           <Image {...icons.deleteIcon} />
-        </Button>
-        <Button onClick={onCheckClick} type="button">
-          <Image {...icons.checkMarkIcon} />
         </Button>
       </div>
     </li>

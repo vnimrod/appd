@@ -5,8 +5,8 @@
   flex-direction: column;
   position: relative;
   margin: 10px 0;
-  font-size: $large;
-  background-color: #663399;
+  font-size: $extraLarge;
+  background-color: $rebeccaPurple;
   padding: 10px;
   box-shadow:  0 0 10px $black;
   width: 100%;
@@ -15,8 +15,29 @@
   font-weight: 500;
 }
 
+.editInput {
+  width: 70%;
+}
+
+.todoText {
+  word-break: break-all;
+  width: 85%;
+}
+
+.date {
+  position: absolute;
+  right: 10px;
+  top: 2px;
+}
+
 .buttons {
   position: absolute;
-  right: 50px;
-  top: 15px;
+  right: 10px;
+  bottom: 10px;
+}
+
+.tags {
+  position: absolute;
+  bottom: 5px;
+  color: $lightPink;
 }
