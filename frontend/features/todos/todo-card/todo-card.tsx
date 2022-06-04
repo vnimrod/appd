@@ -1,13 +1,15 @@
 import React, { ChangeEvent, useState } from 'react';
 import styles from './todo-card.module.scss';
 import Image from 'next/image';
+import cn from 'classnames';
 import { Todo } from '../todos.model';
 import { useStore } from '../../../services/store';
 import { Button } from '../../../utils/UI/button';
 import { Input } from '../../../utils/UI/input';
+import { Tags } from '../../tags';
+import { CreatedAt } from '../../created-at';
 import icons from '../../../utils/UI/icons/icons.data.json';
 import texts from '../todos.texts.json';
-import cn from 'classnames';
 
 type Props = {
   todo: Todo;
@@ -19,7 +21,7 @@ export const TodoCard = ({ todo }: Props) => {
   const [isEditClicked, setIsEditClicked] = useState(false);
   const [editData, setEditData] = useState({
     text: todo?.text || '',
-    completed: false,
+    completed: todo.completed,
   });
 
   const onEdit = () => {
@@ -31,9 +33,7 @@ export const TodoCard = ({ todo }: Props) => {
   };
 
   const onCheckClick = () => {
-    if (editData.text && editData.text !== todo.text) {
-      store.todos.update(todo.id, editData);
-    }
+    store.todos.update(todo.id, editData);
     setIsEditClicked(false);
   };
 
@@ -43,14 +43,8 @@ export const TodoCard = ({ todo }: Props) => {
     }
   };
 
-  const timeFormat = () => {
-    const date = new Date(todo.createdTime);
-    return date.toLocaleDateString('he-IL');
-  };
-
   const onCompleted = () => {
     setEditData({ ...editData, completed: !editData.completed });
-    store.todos.update(todo.id, editData);
   };
 
   return (
@@ -61,21 +55,23 @@ export const TodoCard = ({ todo }: Props) => {
         </div>
       ) : (
         <span
-          className={cn(styles.todoText, todo.completed && styles.completed)}
+          className={cn(
+            styles.todoText,
+            editData.completed && styles.completed
+          )}
         >
           {todo.text}
         </span>
       )}
-      <span className={styles.date}>{timeFormat()}</span>
-      <span className={styles.tags}>
-        {todo?.tags?.map((tag) => `#${tag.text} `)}
-      </span>
+      <Tags tags={todo?.tags ? todo.tags : []} />
+      <CreatedAt time={todo.createdTime} classes={'topRight'} />
+
       <div className={styles.buttons}>
         {isEditClicked && (
           <>
             <Button
               onClick={onCompleted}
-              classes={todo.completed || editData.completed ? 'completed' : ''}
+              classes={editData.completed ? 'completed' : ''}
             >
               completed
             </Button>

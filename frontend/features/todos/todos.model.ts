@@ -2,7 +2,7 @@ import { action, makeAutoObservable, runInAction } from "mobx"
 import * as todosService from "../../services/todos/todos"
 
 
-type Tag = {
+export type Tag = {
   id: number,
   text: string
 }
@@ -42,16 +42,22 @@ export default class TodosStore {
 
   async add (formData: todosService.FormData) {
     const data = await todosService.addTodo(formData)
-    this.list = [...this.list, data]
+    runInAction(() => {
+      this.list = [...this.list, data]
+    })
   }
 
   async update (id: number, editedData: todosService.EditedData) {
     await todosService.updateTodo(id, editedData)
-    this.list = this.list.map((item) => item.id === id ? {...item, text: editedData.text}: item)
+    runInAction(() => {
+      this.list = this.list.map((item) => item.id === id ? {...item, text: editedData.text}: item)
+    })
   }
   
   async delete (id: number) {
     await todosService.deleteSingleTodo(id)
-    this.list = this.list.filter((item) => item.id !== id)
+    runInAction(() => {
+      this.list = this.list.filter((item) => item.id !== id)
+    })
   }
 }
