@@ -1,4 +1,5 @@
 {
   "headerText": "TODOS",
-  "windowsConfirmMessage": "Are you sure you want to delete this todo?"
+  "windowsConfirmMessage": "Are you sure you want to delete this todo?",
+  "leftTodos": "Left To Do: "
 }

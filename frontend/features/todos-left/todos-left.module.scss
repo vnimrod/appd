@@ -1,0 +1,10 @@
+@import '../../utils/UI/sass-variables/scss-variables';
+
+.todosLeft{
+  font-size: $mediumLarge;
+  font-family: "Montserrat", sans-serif;
+  color: $lavender;
+  position: absolute;
+  right:0;
+  bottom: -15px;
+}
