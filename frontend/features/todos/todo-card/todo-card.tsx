@@ -7,6 +7,7 @@ import { Button } from '../../../utils/UI/button';
 import { Input } from '../../../utils/UI/input';
 import icons from '../../../utils/UI/icons/icons.data.json';
 import texts from '../todos.texts.json';
+import cn from 'classnames';
 
 type Props = {
   todo: Todo;
@@ -47,6 +48,11 @@ export const TodoCard = ({ todo }: Props) => {
     return date.toLocaleDateString('he-IL');
   };
 
+  const onCompleted = () => {
+    setEditData({ ...editData, completed: !editData.completed });
+    store.todos.update(todo.id, editData);
+  };
+
   return (
     <li className={styles.todoCard}>
       {isEditClicked ? (
@@ -54,7 +60,11 @@ export const TodoCard = ({ todo }: Props) => {
           <Input onChange={onEditTodoTextChange} value={editData.text} />
         </div>
       ) : (
-        <span className={styles.todoText}>{todo.text}</span>
+        <span
+          className={cn(styles.todoText, todo.completed && styles.completed)}
+        >
+          {todo.text}
+        </span>
       )}
       <span className={styles.date}>{timeFormat()}</span>
       <span className={styles.tags}>
@@ -62,9 +72,17 @@ export const TodoCard = ({ todo }: Props) => {
       </span>
       <div className={styles.buttons}>
         {isEditClicked && (
-          <Button onClick={onCheckClick} type="button">
-            <Image {...icons.checkMarkIcon} />
-          </Button>
+          <>
+            <Button
+              onClick={onCompleted}
+              classes={todo.completed || editData.completed ? 'completed' : ''}
+            >
+              completed
+            </Button>
+            <Button onClick={onCheckClick} type="button">
+              <Image {...icons.checkMarkIcon} />
+            </Button>
+          </>
         )}
         <Button onClick={onEdit} type="button">
           <Image {...icons.editIcon} />

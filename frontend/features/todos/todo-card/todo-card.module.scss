@@ -22,6 +22,10 @@
 .todoText {
   word-break: break-all;
   width: 85%;
+
+  &.completed {
+    text-decoration: line-through;
+  }
 }
 
 .date {
@@ -31,9 +35,10 @@
 }
 
 .buttons {
+  display: flex;
   position: absolute;
   right: 10px;
-  bottom: 10px;
+  bottom: 5px;
 }
 
 .tags {
