@@ -1,10 +1,17 @@
 @import '../../utils/UI/sass-variables/scss-variables';
 
 .header {
-  font-size: $headerText;
   margin-top: 50px;
   width: 100%;
   text-align: center;
   color: $maroon;
   font-family: 'Archivo Black', sans-serif;
+
+  @media #{$desktopBreak} {
+    font-size: $headerTextDesktop;
+  }
+
+  @media #{$mobileBreak} {
+    font-size: $headerTextMobile;
+  }
 }

@@ -2,6 +2,15 @@
 
 .search {
   margin-top: 80px;
-  width: 40%;
+;
+  
+@media #{$desktopBreak} {
+  width: 40%
+}
+
+@media #{$mobileBreak} {
+  width: 60%;
+}
+
   box-shadow:  0 0 10px $black;
 }

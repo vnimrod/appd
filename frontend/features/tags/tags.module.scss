@@ -1,7 +1,16 @@
 @import '../../utils/UI/sass-variables/scss-variables';
 
 .tags {
-  position: absolute;
+
+  width: 70%;
   bottom: 5px;
   color: $lightPink;
+  
+  @media #{$desktopBreak} {
+      position: absolute;
+  }
+
+  @media #{$mobileBreak} {
+    width: 70%;
+  }
 }
