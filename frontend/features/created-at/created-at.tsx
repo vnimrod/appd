@@ -7,10 +7,10 @@ type Props = {
 };
 
 export const CreatedAt = ({ time, classes }: Props) => {
-  const timeFormat = () => {
+  const dateFormat = () => {
     const date = new Date(time);
     return date.toLocaleDateString('he-IL');
   };
 
-  return <span className={styles[classes]}>{timeFormat()}</span>;
+  return <span className={styles[classes]}>{dateFormat()}</span>;
 };

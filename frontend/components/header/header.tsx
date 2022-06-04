@@ -1,4 +1,3 @@
-import { text } from 'node:stream/consumers';
 import React from 'react';
 import styles from './header.module.scss';
 import texts from './header.texts.json';
