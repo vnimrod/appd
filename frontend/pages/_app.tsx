@@ -9,7 +9,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <StoreContext.Provider value={store}>
       <Head>
-        <title>appdome | assignment | by Nimrod Weinstein</title>
+        <title>Nimrod Weinstein</title>
       </Head>
       <Header />
       <MainLayout>
